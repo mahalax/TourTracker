@@ -1,0 +1,262 @@
+$whitecolor :white;
+$darkgray: #181f4b;
+$yellowColor: #f4c222;
+$orange: rgb(244, 150, 9);
+$red:red;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.p_20 {
+  padding: 20px;
+}
+/*.MuiFormHelperText-root.Mui-error{
+  color: $yellowColor !important;
+}
+.MuiFormLabel-root.Mui-error{
+  color:inherit !important
+}
+*/
+
+.editColor {
+  background-color: darkblue;
+}
+
+.deleteColor {
+  background-color: darkred;
+}
+
+.errMsg {
+  
+  color: $red;
+  text-align: center;
+  padding: 10px 5px;
+  letter-spacing: 1.3px;
+  margin-bottom: 10px;
+}
+
+.successMsg {
+  background: rgb(9, 158, 54);
+  color: #fff9;
+  text-align: center;
+  padding: 10px 5px;
+  letter-spacing: 1.3px;
+  margin-bottom: 10px;
+}
+
+.heading {
+  color: $darkgray;
+}
+
+.headerIcon {
+  height: 80px;
+  width: 80px;
+  border-top: 50px solid transparent;
+  border-bottom: 50px solid transparent;
+  border-right: 50px solid $yellowColor;
+  margin-left: -40px;
+}
+
+.headerTitle {
+  height: 60px;
+  display: inline-block;
+  align-self: center;
+  padding-right: 20px;
+  margin-left: -50px;
+}
+
+.loginbackground {
+  width: 100%;
+  height: 100vh;
+  background-image: url(/images/loginbackdrop.JPG);
+  background-size: cover;
+  justify-content: space-around;
+  background-color: #181f4b;
+  margin-top: -65px;
+}
+
+.loginpage {
+  padding-top: 70px;
+}
+
+/* table */
+
+.MuiTableCell-root {
+  padding: 2px !important;
+  padding-left: 20px !important;
+
+}
+
+.report_table {
+  border-left: 2px solid $darkgray;
+  border-right: 2px solid $darkgray;
+  border-bottom: 2px solid $darkgray;
+}
+
+.tablecontainer {
+  overflow-x: auto;
+  padding: 10px;
+  margin: 10px;
+
+}
+
+
+.actiontablecell{
+  display:flex;
+  width:150px;
+}
+.subTable{
+  background-color: gray !important;
+  color:white !important
+}
+.subTablecolor{
+  background-color:lightgray !important
+}
+
+//
+#popup{
+  width:"80%" !important
+}
+.justifyBtns{
+  justify-content: flex-end;
+}
+.marginTop20{
+  margin-top: 20px;
+}
+
+
+//file upload
+@mixin profileUpload{
+  display:grid;
+  justify-content: center;
+  align-items: center;
+  }
+.profileUploadSection{
+  @include profileUpload;
+  padding-top: 20px;
+}
+.uploadButton{
+  @include profileUpload;
+
+}  
+
+//profile table view
+.tableviewRow{
+  display: inline-block ; 
+  padding-right: 10px;
+}
+//Loader spinner
+.spinner-wrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgb(255, 255, 255);
+  z-index: 9999;
+
+}
+
+.spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 60px;
+  width: 60px;
+  margin: 0px auto;
+  -webkit-animation: rotation .6s infinite linear;
+  -moz-animation: rotation .6s infinite linear;
+  -o-animation: rotation .6s infinite linear;
+  animation: rotation .6s infinite linear;
+  border-left: 6px solid $darkgray;
+  border-right: 6px solid $darkgray;
+  border-bottom: 6px solid $darkgray;
+  border-top: 6px solid $yellowColor;
+  border-radius: 100%;
+}
+
+.register_forgotpwd {
+  color: $orange;
+  cursor: pointer;
+
+  &:hover {
+    color: $yellowColor
+  }
+
+}
+
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+@-moz-keyframes rotation {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+
+  to {
+    -moz-transform: rotate(359deg);
+  }
+}
+
+@-o-keyframes rotation {
+  from {
+    -o-transform: rotate(0deg);
+  }
+
+  to {
+    -o-transform: rotate(359deg);
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+//end-loader spinner
+
+@media screen and (min-width: 1024px){
+ .delete_desktopbtn {
+      padding-left: 70px;
+  }
+}
+@media screen and (max-width: 765px){
+.justifyBtns{
+  justify-content: center;
+}
+}
+@media screen and (min-width: 765px){
+  .desktopflex{
+    display: flex;
+  }
+  }
+

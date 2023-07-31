@@ -1,0 +1,6 @@
+.no-border {
+    border: 0!important;
+    box-shadow: none;
+    border-color: transparent;
+    
+}

@@ -1,0 +1,102 @@
+import React,{useEffect,lazy, Suspense,useState} from 'react';
+import { Container } from '@material-ui/core';
+import { useRouter } from 'next/router'
+import {useDispatch, useSelector} from 'react-redux';
+import axios from 'axios'
+import dynamic from "next/dynamic";
+import Cookies from 'cookies'
+import { getSession, useSession } from 'next-auth/react'
+import HeaderNav from '../components/Toolbar/Header'
+import { ViewHomeCurrency } from '../store/actions/homeCurrency';
+import { ToastContainer } from 'react-toastify';
+import { baseURL } from '../store/api';
+const Login = dynamic(() => import('../pages/auth/login'),{
+  loading: () => <div><p>Loading...</p></div>
+});
+
+const App = (props) => {
+  const {data : session} = useSession()
+  const[sessionToken,setSessionToken] = useState()
+  const[status,setStatus] = useState(false)
+  const router = useRouter()
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function fetch_session() {
+      const session = await getSession()
+      
+   
+      if (session){
+        setSessionToken(session?.user?.accessToken)
+        dispatch(ViewHomeCurrency(session?.user?.accessToken))
+      }
+      else if(!session){
+        router.push(`${baseURL}`,3);
+      }
+    }
+    fetch_session()
+    setStatus(true)
+  }, []);
+  
+  const  getHomeCurrency = () => {
+    router.push('settings/homecurrency')
+  }
+  
+   //useEffect(() => {
+     //if(token){
+       //const getUser = () => {
+         //dispatch(dispatchLogin())
+
+       // return fetchUser(token).then(res => {
+        //  dispatch(dispatchGetUser(res))
+        //})
+       //}
+       //getUser()
+    // }
+  //  },[token, dispatch])
+
+  return (
+   
+    <Container maxWidth="lg">
+      <h1>index page</h1>
+      {!status ? <p>Loading...</p> :
+        <>
+        {session && 
+        <>
+          
+          {!props?.records ?
+          getHomeCurrency() :<p>your home currency : {props.records[0].homeCurrency}</p>
+          }
+          </>
+        }
+        {!session && <Login/>}
+        </>
+      }
+      <ToastContainer />
+    </Container>
+  
+  )
+}
+
+export default App;
+export async function getServerSideProps(ctx) {
+  const session = await getSession(ctx)
+  let headers ={}
+  let data ={records:""}
+  if(session){
+    headers.authorization = session?.user?.accessToken;
+  const response = await axios({
+      method: 'get',
+      url: `${baseURL}api/settings/homecurrency/viewHomeCurrency`,
+      headers: headers
+     })
+    console.log("response :",response.data)
+    data.records = response.data
+  
+  }
+  return {
+    props: {
+  records: data.records,
+}
+}
+}
